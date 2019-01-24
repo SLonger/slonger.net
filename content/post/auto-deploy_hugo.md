@@ -21,19 +21,22 @@ git
 vps server 配置(www-data 用户)
 
  1. vps server 获取 github repo  through ssh
-```
-mkdir /var/www/.ssh	
+
+``` md
+mkdir /var/www/.ssh  
 chown -R www-data:www-data /var/www/.ssh/
  ```
+
  生成ssh key
 `sudo -Hu www-data ssh-keygen -t rsa`
 www-data 用户主 home目录 /var/www 生成ssh ke在/var/www.ssh/id_rsa.pub    
 添加 ssh key 到github 中。
 假设下载 mysite 项目
+
 ```
 cd /var/www
-sudo chown -R www-data:www-data /var/www/mysite
-sudo -u www-data git clone git@github.com:[githubuser]/mysite.git /var/www/mysite
+sudo chown -R www-data:www-data /var/www/mysite  
+sudo -u www-data git clone git@github.com:[githubuser]/mysite.git /var/www/mysite 
 ```
 2.  nginx 和php 脚本设置
 	  php 脚本(test.php:最简单的，如果需要添加认证什么自行添加)
