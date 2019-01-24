@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-01-10T00:00:00&#43;08:00" />
 <meta itemprop="dateModified" content="2019-01-10T00:00:00&#43;08:00" />
-<meta itemprop="wordCount" content="308">
+<meta itemprop="wordCount" content="434">
 
 
 
@@ -169,8 +169,7 @@ git</p>
 </div>
 <p>生成ssh key<br />
 <code>sudo -Hu www-data ssh-keygen -t rsa</code><br />
-www-data 用户主 home目录 /var/www 生成ssh ke在/var/www.ssh/id_rsa.pub<br />
-添加 ssh key 到github 中。<br />
+www-data 用户主 home目录 /var/www 生成ssh key在/var/www.ssh/id_rsa.pub    ;添加 ssh key 到github 中。<br />
 假设下载 mysite 项目</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -185,26 +184,69 @@ sudo -u www-data git clone git@github.com:[githubuser]/mysite.git /var/www/mysit
 </div>
 </div>
 <ol>
-<li><p>nginx 和php 脚本设置<br />
-  php 脚本(test.php:最简单的，如果需要添加认证什么自行添加)</p>
+<li><p>php 脚本设置<br />
+ (test.php:  chown www-data:www-data /var/www/script/)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-php" data-lang="php">    <span class="cp">&lt;?php</span>
-    <span class="nx">exec</span><span class="p">(</span><span class="s2">&#34;cd /var/www/mysite; git pull &#34;</span><span class="p">);</span>
-    <span class="cp">?&gt;</span>
+        <span class="nv">$target</span> <span class="o">=</span> <span class="s1">&#39;/var/www/example.net&#39;</span><span class="p">;</span> <span class="c1">// 生产环境web目录
+</span><span class="c1"></span>        <span class="nv">$secret</span> <span class="o">=</span> <span class="s2">&#34;xxx&#34;</span><span class="p">;</span> <span class="c1">// git wehook secret
+</span><span class="c1"></span>            
+        <span class="nv">$json</span> <span class="o">=</span> <span class="nx">file_get_contents</span><span class="p">(</span><span class="s1">&#39;php://input&#39;</span><span class="p">);</span> <span class="c1">//获取 github 发送的消息
+</span><span class="c1"></span>        <span class="nv">$content</span> <span class="o">=</span> <span class="nx">json_decode</span><span class="p">(</span><span class="nv">$json</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span> 
+            
+       <span class="nv">$signature</span> <span class="o">=</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;HTTP_X_HUB_SIGNATURE&#39;</span><span class="p">];</span> <span class="c1">// 获取github 的secret 加密消息
+</span><span class="c1"></span>       <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$signature</span><span class="p">)</span> <span class="p">{</span>
+           <span class="k">return</span> <span class="nx">http_response_code</span><span class="p">(</span><span class="mi">404</span><span class="p">);</span>
+       <span class="p">}</span>
+     <span class="k">list</span><span class="p">(</span><span class="nv">$algo</span><span class="p">,</span> <span class="nv">$hash</span><span class="p">)</span> <span class="o">=</span> <span class="nx">explode</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="nv">$signature</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+         
+     <span class="c1">//计算签名
+</span><span class="c1"></span>     <span class="nv">$payloadHash</span> <span class="o">=</span> <span class="nx">hash_hmac</span><span class="p">(</span><span class="nv">$algo</span><span class="p">,</span> <span class="nv">$json</span><span class="p">,</span> <span class="nv">$secret</span><span class="p">);</span>
+
+   <span class="c1">// 判断签名是否匹配
+</span><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nv">$hash</span> <span class="o">===</span> <span class="nv">$payloadHash</span><span class="p">)</span> <span class="p">{</span>
+         <span class="nv">$cmd</span> <span class="o">=</span> <span class="s2">&#34;cd </span><span class="si">$target</span><span class="s2"> &amp;&amp; git pull&#34;</span><span class="p">;</span>
+         <span class="nv">$res</span> <span class="o">=</span> <span class="nx">shell_exec</span><span class="p">(</span><span class="nv">$cmd</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">exit</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="cp">?&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div>
-<p>添加访问权限<br />
-<code>chown www-data:www-data /var/www/script/test.php</code></p>
-
-<p>nginx 配置</p>
+<ol>
+<li>nginx 配置  (path: /etc/nginx/site-available/example.net)<br />
+<br /></li>
+</ol></li>
+</ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt"> 1
@@ -222,31 +264,50 @@ sudo -u www-data git clone git@github.com:[githubuser]/mysite.git /var/www/mysit
 </span><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma"> server {
-    listen 80;
-    listen [::]:80;
-    server_name example.com;
-    location ~ \.php$ {
-        root /var/www/script;
-        include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
-    }
-    location / {
-            root /var/www/mysite/public/;
-            index index.html;
-            try_files $uri $uri/ =404;
-    }
-}</pre></td></tr></table>
-</div>
-</div>
-<p>nginx 和php-fpm 运行用户都是 www-data</p></li>
+<pre class="chroma">server {
+      listen       443 ssl;
+      charset utf-8;
+      server_name  example.net;
 
-<li><p>github webhook 设置<br />
-    添加 webhook url  http://[yoursite].com/test.php<br />
-    Click  <strong>Add webhook</strong></p></li>
-</ol>
+	  # add ssl and ssl setting 
+      ssl on;
+      ssl_certificate      /path/full_chain.pem;
+      ssl_certificate_key  /path/private.key;
+      ssl_session_cache    shared:SSL:1m;
+      ssl_session_timeout  5m;
+      ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+
+      location / {
+         root /var/www/exmaple.net/public/;
+         index index.html;
+         try_files $uri $uri/ =404;
+      }
+      
+     location ~ \.php$ {
+         root /var/www/script;
+         include snippets/fastcgi-php.conf;
+         fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+     }
+  }</pre></td></tr></table>
+</div>
+</div>
+<p>nginx 和php-fpm 运行用户都是 www-data<br />
+3. github webhook 设置<br />
+        添加 webhook url  http://[yoursite].com/test.php<br />
+         添加    secret  密码<br />
+Click  <strong>Add webhook</strong></p>
 
 <ul>
 <li>本地更新后 vps server 自动执行 /var/www/script/test.php 脚本 更新 github mysite repo<br /></li>
@@ -256,7 +317,6 @@ sudo -u www-data git clone git@github.com:[githubuser]/mysite.git /var/www/mysit
 
 <p>Reference link<br />
 <a href="https://www.portent.com/blog/design-dev/github-auto-deploy-setup-guide.htm)">https://www.portent.com/blog/design-dev/github-auto-deploy-setup-guide.htm)</a></p>
-
     </div>
 
     <div class="post-copyright">
