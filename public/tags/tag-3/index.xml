@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tag-3 on Slonger&#39;s blog</title>
+    <link>http://www.slonger.net/tags/tag-3/</link>
+    <description>Recent content in tag-3 on Slonger&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 10 Jan 2019 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="http://www.slonger.net/tags/tag-3/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>git webhook 自动部署 hugo  静态网站到 vps</title>
+      <link>http://www.slonger.net/post/auto-deploy_hugo/</link>
+      <pubDate>Thu, 10 Jan 2019 00:00:00 +0800</pubDate>
+      
+      <guid>http://www.slonger.net/post/auto-deploy_hugo/</guid>
+      <description>环境 ubuntu Ubuntu 16.04.5 LTS; nginx nginx/1.10.3 hugo v0.53 php-fpm7.0 git vps server 配置(www-data 用户) vps server 获取 github repo through ssh 1 2 mkdir /var/www/.ssh chown -R www-data:www-data /var/www/.ssh/ 生成ssh key sudo -Hu www-data ssh-keygen -t rsa www-data 用户主 home目录 /var/www 生成s</description>
+    </item>
+    
+    <item>
+      <title>Theme preview</title>
+      <link>http://www.slonger.net/post/even-preview/</link>
+      <pubDate>Tue, 10 Jan 2017 00:00:00 +0800</pubDate>
+      
+      <guid>http://www.slonger.net/post/even-preview/</guid>
+      <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+  </channel>
+</rss>
