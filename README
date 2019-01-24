@@ -1,3 +1,4 @@
 even modify:
 	1.	修改：     layouts/partials/footer.html :注释 rss 图标
 		 <!-- <a href="{{ .Site.RSSLink }}" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a> -->
+test
