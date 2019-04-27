@@ -1,7 +1,7 @@
 ﻿---
 title: "git webhook 自动部署 hugo  静态网站到 vps"
 date: 2019-01-10T00:00:00+08:00
-lastmod: 2019-01-10T00:00:00+08:00
+lastmod: 2019-04-27T00:00:00+08:00
 tags: ["preview", "Theme preview", "tag-3"]
 categories: ["hugo", "vps", "githook"]
 
@@ -21,9 +21,9 @@ autoCollapseToc: true
 php-fpm7.0
 git
 
-vps server 配置(www-data 用户)
+# 1.vps server 配置(www-data 用户)
 
-1. vps server 获取 github repo  through ssh
+ vps server 获取 github repo  through ssh
 
 ```md
 mkdir /var/www/.ssh  
@@ -40,7 +40,7 @@ cd /var/www
 sudo chown -R www-data:www-data /var/www/mysite  
 sudo -u www-data git clone git@github.com:[githubuser]/mysite.git /var/www/mysite 
 ```
-2.  php 脚本设置
+# 2.  php 脚本设置
 	 (test.php:  chown www-data:www-data /var/www/script/)
 	  ``` php 
 	    <?php
@@ -69,7 +69,8 @@ sudo -u www-data git clone git@github.com:[githubuser]/mysite.git /var/www/mysit
 	?>
 	```
 	
-  3. nginx 配置  (path: /etc/nginx/site-available/example.net)
+# 3. nginx 配置  
+ path: /etc/nginx/site-available/example.net
   
   ```
 server {
@@ -100,7 +101,7 @@ server {
 ```
 
 nginx 和php-fpm 运行用户都是 www-data 
-3. github webhook 设置
+# 4. github webhook 设置
 	    添加 webhook url	http://[yoursite].com/test.php
 	     添加    secret  密码
 Click  **Add webhook**

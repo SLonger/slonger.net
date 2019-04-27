@@ -1,6 +1,6 @@
 baseURL = "http://www.slonger.net/"
 languageCode = "en"
-defaultContentLanguage = "en"                             # en / zh-cn / ... (This field determines which i18n file to use)
+defaultContentLanguage = "zh-cn"                             # en / zh-cn / ... (This field determines which i18n file to use)
 title = "Slonger's blog"
 preserveTaxonomyNames = true
 enableRobotsTXT = true
