@@ -6,10 +6,19 @@
     <description>Recent content on Slonger&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 10 Jan 2019 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 27 Apr 2019 00:00:00 +0800</lastBuildDate>
     
 	<atom:link href="http://www.slonger.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>利用 ssh  反向代理外部访问内网服务</title>
+      <link>http://www.slonger.net/post/%E5%8F%8D%E5%90%91ssh%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E5%86%85%E7%BD%91%E4%B8%BB%E6%9C%BA/</link>
+      <pubDate>Sat, 27 Apr 2019 00:00:00 +0800</pubDate>
+      
+      <guid>http://www.slonger.net/post/%E5%8F%8D%E5%90%91ssh%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E5%86%85%E7%BD%91%E4%B8%BB%E6%9C%BA/</guid>
+      <description>前言 场景 需要在外部环境访问家里的电脑 准备环境 一个具有公网ip的A 服务器 vps example 45.32.172.16 ( ubuntu 16.04(根据情况自己配置) 需要能够被外部访问的内网B 机器</description>
+    </item>
     
     <item>
       <title>git webhook 自动部署 hugo  静态网站到 vps</title>
@@ -17,7 +26,7 @@
       <pubDate>Thu, 10 Jan 2019 00:00:00 +0800</pubDate>
       
       <guid>http://www.slonger.net/post/auto-deploy_hugo/</guid>
-      <description>环境 ubuntu Ubuntu 16.04.5 LTS; nginx nginx/1.10.3 hugo v0.53 php-fpm7.0 git vps server 配置(www-data 用户) vps server 获取 github repo through ssh 1 2 mkdir /var/www/.ssh chown -R www-data:www-data /var/www/.ssh/ 生成ssh key sudo -Hu www-data ssh-keygen -t rsa www-data 用户主 home目录 /var/www 生成s</description>
+      <description>环境 ubuntu Ubuntu 16.04.5 LTS; nginx nginx/1.10.3 hugo v0.53 php-fpm7.0 git 1.vps server 配置(www-data 用户) vps server 获取 github repo through ssh 1 2 mkdir /var/www/.ssh chown -R www-data:www-data /var/www/.ssh/ 生成ssh key sudo -Hu www-data ssh-keygen -t rsa www-data 用户主 home目录 /var/www 生成s</description>
     </item>
     
     <item>

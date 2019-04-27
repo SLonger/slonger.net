@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -44,7 +44,7 @@
 <meta property="og:description" content="Hugo theme even example site." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://www.slonger.net/" />
-<meta property="og:updated_time" content="2019-01-10T00:00:00&#43;08:00"/>
+<meta property="og:updated_time" content="2019-04-27T00:00:00&#43;08:00"/>
 
 <meta itemprop="name" content="Slonger&#39;s blog">
 <meta itemprop="description" content="Hugo theme even example site.">
@@ -118,6 +118,27 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/%E5%8F%8D%E5%90%91ssh%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E5%86%85%E7%BD%91%E4%B8%BB%E6%9C%BA/">利用 ssh  反向代理外部访问内网服务</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-04-27 </span>
+      <div class="post-category">
+          <a href="/categories/ssh/"> ssh </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      前言 场景 需要在外部环境访问家里的电脑 准备环境 一个具有公网ip的A 服务器 vps example 45.32.172.16 ( ubuntu 16.04(根据情况自己配置) 需要能够被外部访问的内网B 机器
+    </div>
+    <div class="read-more">
+      <a href="/post/%E5%8F%8D%E5%90%91ssh%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E5%86%85%E7%BD%91%E4%B8%BB%E6%9C%BA/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/auto-deploy_hugo/">git webhook 自动部署 hugo  静态网站到 vps</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2019-01-10 </span>
@@ -131,10 +152,10 @@
   
   <div class="post-content">
     <div class="post-summary">
-      环境 ubuntu Ubuntu 16.04.5 LTS; nginx nginx/1.10.3 hugo v0.53 php-fpm7.0 git vps server 配置(www-data 用户) vps server 获取 github repo through ssh 1 2 mkdir /var/www/.ssh chown -R www-data:www-data /var/www/.ssh/ 生成ssh key sudo -Hu www-data ssh-keygen -t rsa www-data 用户主 home目录 /var/www 生成s
+      环境 ubuntu Ubuntu 16.04.5 LTS; nginx nginx/1.10.3 hugo v0.53 php-fpm7.0 git 1.vps server 配置(www-data 用户) vps server 获取 github repo through ssh 1 2 mkdir /var/www/.ssh chown -R www-data:www-data /var/www/.ssh/ 生成ssh key sudo -Hu www-data ssh-keygen -t rsa www-data 用户主 home目录 /var/www 生成s
     </div>
     <div class="read-more">
-      <a href="/post/auto-deploy_hugo/" class="read-more-link">Read more..</a>
+      <a href="/post/auto-deploy_hugo/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -157,7 +178,7 @@
       Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.
     </div>
     <div class="read-more">
-      <a href="/post/even-preview/" class="read-more-link">Read more..</a>
+      <a href="/post/even-preview/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -179,7 +200,7 @@
 We&rsquo;ll start with creating a new site with a very basic template.
     </div>
     <div class="read-more">
-      <a href="/post/english-preview/" class="read-more-link">Read more..</a>
+      <a href="/post/english-preview/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -200,73 +221,7 @@ We&rsquo;ll start with creating a new site with a very basic template.
       《长恨歌》是中国唐朝诗人白居易的一首长篇叙事诗。 第一段：贵妃受宠爱 汉皇重色思倾国，御宇多年求不得。杨家有女初长成，养在深闺人未识。 天生丽质难
     </div>
     <div class="read-more">
-      <a href="/post/chinese-preview/" class="read-more-link">Read more..</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/shortcodes/">Shortcodes</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-08-30 </span>
-      <div class="post-category">
-          <a href="/categories/shortcodes/"> shortcodes </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <h1 id="admonition">Admonition</h1>
-
-<div class="admonition note"><p class="admonition-title">I&#39;m title!</p>
-  <p>biu biu biu.</p>
-
-<p><details class="admonition note"><summary class="admonition-title">note</summary><br />
-  <p>biu biu biu.</p></p>
-
-<p></details></p>
-
-<div class="admonition example">
-  <p>Without title.</p>
-
-</div>
-
-</div>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-markdown" data-lang="markdown"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-markdown" data-lang="markdown">{{% admonition note &#34;I&#39;m title!&#34; false %}}<span class="err">
-</span><span class="err"></span>biu biu biu.<span class="err">
-</span><span class="err">
-</span><span class="err"></span>{{% admonition type=&#34;note&#34; title=&#34;note&#34; details=&#34;true&#34; %}}<span class="err">
-</span><span class="err"></span>biu biu biu.<span class="err">
-</span><span class="err"></span>{{% /admonition %}}<span class="err">
-</span><span class="err">
-</span><span class="err"></span>{{% admonition example %}}<span class="err">
-</span><span class="err"></span>Without title.<span class="err">
-</span><span class="err"></span>{{% /admonition %}}<span class="err">
-</span><span class="err">
-</span><span class="err"></span>{{% /admonition %}}</code></pre></td></tr></table>
-</div>
-</div>
-    </div>
-    <div class="read-more">
-      <a href="/post/shortcodes/" class="read-more-link">Read more..</a>
+      <a href="/post/chinese-preview/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -276,7 +231,7 @@ We&rsquo;ll start with creating a new site with a very basic template.
   <nav class="pagination">
     
     <a class="next" href="/page/2/">
-        <span class="next-text">Next</span>
+        <span class="next-text">下一页</span>
         <i class="iconfont icon-right"></i>
       </a>
   </nav>
@@ -290,16 +245,16 @@ We&rsquo;ll start with creating a new site with a very basic template.
       <div class="social-links">
       <a href="https://stackoverflow.com/users/6612455/long?tab=profile" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
       <a href="https://github.com/SLonger" class="iconfont icon-github" title="github"></a>
-  
+  <a href="http://www.slonger.net/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
   <span class="power-by">
-    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
   </span>
   <span class="division">|</span>
   <span class="theme-info">
-    Theme - 
+    主题 - 
     <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
   </span>
 
@@ -315,7 +270,6 @@ We&rsquo;ll start with creating a new site with a very basic template.
     <span class="author">Slonger</span>
   </span>
 </div>
-
     </footer>
 
     <div class="back-to-top" id="back-to-top">

@@ -17,7 +17,7 @@
       <pubDate>Thu, 10 Jan 2019 00:00:00 +0800</pubDate>
       
       <guid>http://www.slonger.net/post/auto-deploy_hugo/</guid>
-      <description>环境 ubuntu Ubuntu 16.04.5 LTS; nginx nginx/1.10.3 hugo v0.53 php-fpm7.0 git vps server 配置(www-data 用户) vps server 获取 github repo through ssh 1 2 mkdir /var/www/.ssh chown -R www-data:www-data /var/www/.ssh/ 生成ssh key sudo -Hu www-data ssh-keygen -t rsa www-data 用户主 home目录 /var/www 生成s</description>
+      <description>环境 ubuntu Ubuntu 16.04.5 LTS; nginx nginx/1.10.3 hugo v0.53 php-fpm7.0 git 1.vps server 配置(www-data 用户) vps server 获取 github repo through ssh 1 2 mkdir /var/www/.ssh chown -R www-data:www-data /var/www/.ssh/ 生成ssh key sudo -Hu www-data ssh-keygen -t rsa www-data 用户主 home目录 /var/www 生成s</description>
     </item>
     
   </channel>

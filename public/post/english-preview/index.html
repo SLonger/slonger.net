@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -140,7 +140,7 @@ We&rsquo;ll start with creating a new site with a very basic template."/>
     </header>
 
     <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">Contents</h2>
+  <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
 <ul>
@@ -2068,19 +2068,23 @@ $ vi themes/zafta/layouts/_default/single.html
 
     <div class="post-copyright">
   <p class="copyright-item">
-    <span class="item-title">Author</span>
+    <span class="item-title">文章作者</span>
     <span class="item-content">Michael Henderson</span>
   </p>
   <p class="copyright-item">
-    <span class="item-title">LastMod</span>
-    <span class="item-content">2017-08-31</span>
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2017-08-31
+        
+    </span>
   </p>
   
   <p class="copyright-item">
-    <span class="item-title">License</span>
+    <span class="item-title">许可协议</span>
     <span class="item-content"><a href="https://github.com/gohugoio/hugoBasicExample" rel="noopener" target="_blank">See origin</a></span>
   </p>
-</div><footer class="post-footer">
+</div>
+<footer class="post-footer">
       <div class="post-tags">
           <a href="/tags/preview/">preview</a>
           <a href="/tags/english/">English</a>
@@ -2090,11 +2094,11 @@ $ vi themes/zafta/layouts/_default/single.html
         <a class="prev" href="/post/hidden-post/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">This is a hidden post.</span>
-            <span class="prev-text nav-mobile">Prev</span>
+            <span class="prev-text nav-mobile">上一篇</span>
           </a>
         <a class="next" href="/post/chinese-preview/">
             <span class="next-text nav-default">[中文] 《长恨歌》</span>
-            <span class="next-text nav-mobile">Next</span>
+            <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
       </nav>
@@ -2110,16 +2114,16 @@ $ vi themes/zafta/layouts/_default/single.html
       <div class="social-links">
       <a href="https://stackoverflow.com/users/6612455/long?tab=profile" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
       <a href="https://github.com/SLonger" class="iconfont icon-github" title="github"></a>
-  
+  <a href="http://www.slonger.net/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
   <span class="power-by">
-    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
   </span>
   <span class="division">|</span>
   <span class="theme-info">
-    Theme - 
+    主题 - 
     <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
   </span>
 
@@ -2135,7 +2139,6 @@ $ vi themes/zafta/layouts/_default/single.html
     <span class="author">Slonger</span>
   </span>
 </div>
-
     </footer>
 
     <div class="back-to-top" id="back-to-top">

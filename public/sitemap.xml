@@ -3,8 +3,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.slonger.net/post/%E5%8F%8D%E5%90%91ssh%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E5%86%85%E7%BD%91%E4%B8%BB%E6%9C%BA/</loc>
+    <lastmod>2019-04-27T00:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://www.slonger.net/post/auto-deploy_hugo/</loc>
-    <lastmod>2019-01-10T00:00:00+08:00</lastmod>
+    <lastmod>2019-04-27T00:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -94,14 +101,14 @@
   
   <url>
     <loc>http://www.slonger.net/post/</loc>
-    <lastmod>2019-01-10T00:00:00+08:00</lastmod>
+    <lastmod>2019-04-27T00:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://www.slonger.net/</loc>
-    <lastmod>2019-01-10T00:00:00+08:00</lastmod>
+    <lastmod>2019-04-27T00:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -129,7 +136,7 @@
   
   <url>
     <loc>http://www.slonger.net/tags/theme-preview/</loc>
-    <lastmod>2019-01-10T00:00:00+08:00</lastmod>
+    <lastmod>2019-04-27T00:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -157,21 +164,21 @@
   
   <url>
     <loc>http://www.slonger.net/categories/githook/</loc>
-    <lastmod>2019-01-10T00:00:00+08:00</lastmod>
+    <lastmod>2019-04-27T00:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://www.slonger.net/categories/hugo/</loc>
-    <lastmod>2019-01-10T00:00:00+08:00</lastmod>
+    <lastmod>2019-04-27T00:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://www.slonger.net/tags/preview/</loc>
-    <lastmod>2019-01-10T00:00:00+08:00</lastmod>
+    <lastmod>2019-04-27T00:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -186,6 +193,13 @@
   <url>
     <loc>http://www.slonger.net/categories/shortcodes/</loc>
     <lastmod>2018-02-01T18:01:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.slonger.net/categories/ssh/</loc>
+    <lastmod>2019-04-27T00:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -206,7 +220,7 @@
   
   <url>
     <loc>http://www.slonger.net/tags/tag-3/</loc>
-    <lastmod>2019-01-10T00:00:00+08:00</lastmod>
+    <lastmod>2019-04-27T00:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -220,7 +234,7 @@
   
   <url>
     <loc>http://www.slonger.net/categories/vps/</loc>
-    <lastmod>2019-01-10T00:00:00+08:00</lastmod>
+    <lastmod>2019-04-27T00:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
