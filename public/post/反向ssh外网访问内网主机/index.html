@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>利用 ssh  反向代理外部访问内网服务 - Slonger&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Slonger" /><meta name="description" content="前言 场景 需要在外部环境访问家里的电脑 准备环境 一个具有公网ip的A 服务器 vps example 45.32.172.16 ( ubuntu 16.04(根据情况自己配置) 需要能够被外部访问的内网B 机器" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.53 with even 4.0.0" />
+
+
+<link rel="canonical" href="http://www.slonger.net/post/%E5%8F%8D%E5%90%91ssh%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E5%86%85%E7%BD%91%E4%B8%BB%E6%9C%BA/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="利用 ssh  反向代理外部访问内网服务" />
+<meta property="og:description" content="前言 场景 需要在外部环境访问家里的电脑 准备环境 一个具有公网ip的A 服务器 vps example 45.32.172.16 ( ubuntu 16.04(根据情况自己配置) 需要能够被外部访问的内网B 机器" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.slonger.net/post/%E5%8F%8D%E5%90%91ssh%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E5%86%85%E7%BD%91%E4%B8%BB%E6%9C%BA/" /><meta property="article:published_time" content="2019-04-27T00:00:00&#43;08:00"/>
+<meta property="article:modified_time" content="2019-04-27T00:00:00&#43;08:00"/>
+
+<meta itemprop="name" content="利用 ssh  反向代理外部访问内网服务">
+<meta itemprop="description" content="前言 场景 需要在外部环境访问家里的电脑 准备环境 一个具有公网ip的A 服务器 vps example 45.32.172.16 ( ubuntu 16.04(根据情况自己配置) 需要能够被外部访问的内网B 机器">
+
+
+<meta itemprop="datePublished" content="2019-04-27T00:00:00&#43;08:00" />
+<meta itemprop="dateModified" content="2019-04-27T00:00:00&#43;08:00" />
+<meta itemprop="wordCount" content="1109">
+
+
+
+<meta itemprop="keywords" content="preview,Theme preview,tag-3," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="利用 ssh  反向代理外部访问内网服务"/>
+<meta name="twitter:description" content="前言 场景 需要在外部环境访问家里的电脑 准备环境 一个具有公网ip的A 服务器 vps example 45.32.172.16 ( ubuntu 16.04(根据情况自己配置) 需要能够被外部访问的内网B 机器"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Slonger</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Slonger</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">利用 ssh  反向代理外部访问内网服务</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-04-27 </span>
+        <div class="post-category">
+            <a href="/categories/ssh/"> ssh </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#前言">前言</a></li>
+<li><a href="#配置">配置</a>
+<ul>
+<li><a href="#一-ssh-设置-b-机器上-配置ssh">一.  ssh 设置 :B 机器上 配置ssh</a></li>
+<li><a href="#二-autossh-配置">二. autossh 配置</a></li>
+<li><a href="#三-测试方式">三 .测试方式：</a></li>
+<li><a href="#四-简单代理-太长-直接复制">四 .简单代理( 太长 直接复制)</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="前言">前言</h1>
+
+<ul>
+<li>场景<br />
+   需要在外部环境访问家里的电脑<br /></li>
+<li>准备环境<br />
+
+<ol>
+<li>一个具有公网ip的A 服务器 vps  example 45.32.172.16 (  ubuntu 16.04(根据情况自己配置)<br /></li>
+<li>需要能够被外部访问的内网B 机器（ubuntu 18.04)<br />
+<br /></li>
+</ol></li>
+</ul>
+
+<h1 id="配置">配置</h1>
+
+<h2 id="一-ssh-设置-b-机器上-配置ssh">一.  ssh 设置 :B 机器上 配置ssh</h2>
+
+<p>ssh 配置 反向代理的语法：( from man ssh)</p>
+
+<blockquote>
+<p>-R [bind_address:]port:host:hostport</p>
+</blockquote>
+
+<p>example</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"> $ ssh -NfR 7001:localhost:22 root(example)@45.32.172.16 -p 22 </pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>-R :  做反向ssh，将远程服务器的7001端口映射成连接本机(B)与该服务器的反向ssh的端口<br />
+-N:只用于端口转发，并不执行远程shell<br />
+-f:在执行命令前，进入后台处理<br />
+bind_address: 远程服务器（A) 由于ssh 本身需要使用到远程服务器 所以这里可以忽略<br />
+post: 远程端口 该端口映射到内网本地端口<br />
+host: 内网 B ip hostport: 内网 B 端口<br />
+-p:  ssh 默认端口是22 如果没有设置其他端口 可以不写 （-p 22)</p>
+</blockquote>
+
+<p>执行效果：</p>
+
+<ul>
+<li>B 机器 后台一直在运行 ssh 命令<br /></li>
+<li>45.32.172.16：7001 将会被映射成 内网b机器22 端口（设置成 22  直接到时免密登陆）<br /></li>
+<li>可以在 a 机器上看是否 在监听 7001 端口<br />
+<br /></li>
+</ul>
+
+<blockquote>
+<p>$netstat -anp | grep 7001<br />
+ tcp        0      0 0.0.0.0:7001<br />
+  0.0.0.0:*               LISTEN      2646/sshd: root  tcp6       0      0 :::7001                 :::*                    LISTEN<br />
+2646/sshd: root</p>
+</blockquote>
+
+<p>&mdash;&ndash; 这里可以直接先用测试方式进行测试看是否配置成功&mdash;&ndash;</p>
+
+<p>常见问题：<br />
+如果按照上面未配置成功 可能有以下问题：</p>
+
+<p>1 . 外网服务器上的 SSH 没有配置对。为此你需要去外网服务器上修改  或者添加  一行 <code>/etc/ssh/sshd_config</code> 文件如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">GatewayPorts yes</pre></td></tr></table>
+</div>
+</div>
+<p>这个选项的意思是，SSH 隧道监听的服务的 IP 是对外开放的 0.0.0.0，而不是只对本机的 127.0.0.1。不开 GatewayPorts 的后果是不能通过 <code>45.32.172.16:7001</code> 访问，只能在外网服务器上通过 <code>127.0.0.1:7001</code> 服务到本地开发机的服务。<br />
+重启 sshd 服务</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">service sshd restart</pre></td></tr></table>
+</div>
+</div>
+<p>2.A 服务器防火墙未开启 7001  需要设置。</p>
+
+<hr />
+
+<h2 id="二-autossh-配置">二. autossh 配置</h2>
+
+<p>在b机器上配置的ssh跟服务断开时，自动重新连接 避免需要在机器上手动启动<br />
+这里由于autossh 直接进入后台执行命令 而不会有输入密码提示：导致无法连接<br />
+所以先设置下免密登陆.<br />
+在内网的机器B上面执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ssh-copy-id  root@45.32.172.16
+$sudo apt-get install autossh
+$ autossh -M 2222 -NfR 7001:localhost:22 root@45.32.172.16 -p 22</pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>-M: 另外再设置端口用于监听 ssh 连接情况</p>
+</blockquote>
+
+<h2 id="三-测试方式">三 .测试方式：</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">找一台可以远程 a 服务器的电脑执行：</pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>ssh -p 7001 username(localusername)@45.32.172.16</p>
+</blockquote>
+
+<p>注意： 这里可能跟 你在b机器上 的username不一致。例如</p>
+
+<p>你想在外部访问的是B 机器   long(用户名）则上面该命令是<br />
+&gt; ssh -p 7001  long@45.32.172.16</p>
+
+<p>而不是<br />
+&gt; ssh -p 7001   root@45.32.172.16</p>
+
+<p>否则会不断出现密码输入错误的提示</p>
+
+<h2 id="四-简单代理-太长-直接复制">四 .简单代理( 太长 直接复制)</h2>
+
+<p>还有一种方式叫作动态转发，命令如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">ssh -D 50000 root@45.32.127.32。</pre></td></tr></table>
+</div>
+</div>
+<p>这种方式其实就是相当于socks代理，他会把本地的所有请求都转发到远程服务器上面，很实用哦，假如说你的那台服务器是在国外的话，你懂的！</p>
+
+<p><strong>参考连接：</strong><br />
+1.   [ [利用ssh反向代理以及autossh实现从外网连接内网服务器(<a href="https://www.cnblogs.com/kwongtai/p/6903420.html)">https://www.cnblogs.com/kwongtai/p/6903420.html)</a>]<br />
+2. <a href="https://blog.mythsman.com/2017/01/14/1/">利用反向ssh从外网访问内网主机</a><br />
+3. [# <a href="https://segmentfault.com/a/1190000011846777">调试利器-SSH隧道</a>]</p>
+
+<p>OVER!!</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Slonger</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-04-27
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content">MIT</span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/preview/">preview</a>
+          <a href="/tags/theme-preview/">Theme preview</a>
+          <a href="/tags/tag-3/">tag-3</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/auto-deploy_hugo/">
+            <span class="next-text nav-default">git webhook 自动部署 hugo  静态网站到 vps</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/6612455/long?tab=profile" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/SLonger" class="iconfont icon-github" title="github"></a>
+  <a href="http://www.slonger.net/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Slonger</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

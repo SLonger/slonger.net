@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Theme preview on Slonger&#39;s blog</title>
+    <link>http://www.slonger.net/tags/theme-preview/</link>
+    <description>Recent content in Theme preview on Slonger&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 27 Apr 2019 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="http://www.slonger.net/tags/theme-preview/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>利用 ssh  反向代理外部访问内网服务</title>
+      <link>http://www.slonger.net/post/%E5%8F%8D%E5%90%91ssh%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E5%86%85%E7%BD%91%E4%B8%BB%E6%9C%BA/</link>
+      <pubDate>Sat, 27 Apr 2019 00:00:00 +0800</pubDate>
+      
+      <guid>http://www.slonger.net/post/%E5%8F%8D%E5%90%91ssh%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E5%86%85%E7%BD%91%E4%B8%BB%E6%9C%BA/</guid>
+      <description>前言 场景 需要在外部环境访问家里的电脑 准备环境 一个具有公网ip的A 服务器 vps example 45.32.172.16 ( ubuntu 16.04(根据情况自己配置) 需要能够被外部访问的内网B 机器</description>
+    </item>
+    
+    <item>
+      <title>git webhook 自动部署 hugo  静态网站到 vps</title>
+      <link>http://www.slonger.net/post/auto-deploy_hugo/</link>
+      <pubDate>Thu, 10 Jan 2019 00:00:00 +0800</pubDate>
+      
+      <guid>http://www.slonger.net/post/auto-deploy_hugo/</guid>
+      <description>环境 ubuntu Ubuntu 16.04.5 LTS; nginx nginx/1.10.3 hugo v0.53 php-fpm7.0 git 1.vps server 配置(www-data 用户) vps server 获取 github repo through ssh 1 2 mkdir /var/www/.ssh chown -R www-data:www-data /var/www/.ssh/ 生成ssh key sudo -Hu www-data ssh-keygen -t rsa www-data 用户主 home目录 /var/www 生成s</description>
+    </item>
+    
+    <item>
+      <title>Theme preview</title>
+      <link>http://www.slonger.net/post/even-preview/</link>
+      <pubDate>Tue, 10 Jan 2017 00:00:00 +0800</pubDate>
+      
+      <guid>http://www.slonger.net/post/even-preview/</guid>
+      <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+  </channel>
+</rss>
